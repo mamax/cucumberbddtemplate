@@ -1,18 +1,23 @@
 package com.tools.qa.stepdefs;
 
+import com.tools.qa.pageObjects.CartPage;
+import com.tools.qa.pageObjects.CheckoutPage;
+import com.tools.qa.pageObjects.HomePage;
+import com.tools.qa.pageObjects.ProductListingPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MyStepdefs {
     WebDriver driver;
+    private HomePage home;
+    private ProductListingPage productListingPage;
+    private CartPage cartPage;
+    private CheckoutPage checkoutPage;
 
     @Given("^user is on Home Page$")
     public void userIsOnTheHomePage() throws Throwable{
@@ -24,97 +29,50 @@ public class MyStepdefs {
     }
 
     @When("^he search for \"([^\"]*)\"$")
-    public void heSearchForDress(String arg1) throws Throwable {
-        driver.navigate().to("http://shop.demoqa.com/?s=" + arg1 + "&post_type=product");
+    public void heSearchForDress(String product) throws Throwable {
+        home = new HomePage(driver);
+        home.perform_Search(product);
     }
 
     @And("^choose to buy the first item$")
     public void chooseToBuyTheFirstItem() throws Throwable {
-        List<WebElement> items = driver.findElements(By.cssSelector(".noo-product-inner"));
-        items.get(0).click();
-
-        WebElement addToCart = driver.findElement(By.cssSelector("button.single_add_to_cart_button"));
-        addToCart.click();
+        productListingPage = new ProductListingPage(driver);
+        productListingPage.select_Product(0);
+        productListingPage.clickOn_AddToCart();
     }
 
     @And("^moves to checkout from mini cart$")
     public void movesToCheckoutFromMiniCart() throws Throwable {
-        WebElement cart = driver.findElement(By.cssSelector(".cart-button"));
-        cart.click();
-
-        WebElement continueToCheckout = driver.findElement(By.cssSelector(".checkout-button.alt"));
-        continueToCheckout.click();
+        cartPage = new CartPage(driver);
+        cartPage.clickOn_Cart();
+        cartPage.clickOn_ContinueToCheckout();
     }
 
     @And("^enter personal details on checkout page$")
     public void enterPersonalDetailsOnCheckoutPage() throws Throwable {
-        Thread.sleep(5000);
-        WebElement firstName = driver.findElement(By.cssSelector("#billing_first_name"));
-        firstName.sendKeys("Lakshay");
-        WebElement lastName = driver.findElement(By.cssSelector("#billing_last_name"));
-        lastName.sendKeys("Sharma");
-
-        WebElement emailAddress = driver.findElement(By.cssSelector("#billing_email"));
-        emailAddress.sendKeys("test@gmail.com");
-
-        WebElement phone = driver.findElement(By.cssSelector("#billing_phone"));
-        phone.sendKeys("07438862327");
-
-        WebElement countryDropDown = driver.findElement(By.cssSelector("#billing_country_field .select2-arrow"));
-        countryDropDown.click();
-        Thread.sleep(2000);
-
-        List<WebElement> countryList = driver.findElements(By.cssSelector("#select2-drop ul li"));
-        for (WebElement country : countryList) {
-            if (country.getText().equals("India")) {
-                country.click();
-                Thread.sleep(3000);
-                break;
-            }
-        }
-        WebElement city = driver.findElement(By.cssSelector("#billing_city"));
-        city.sendKeys("Delhi");
-
-        WebElement address = driver.findElement(By.cssSelector("#billing_address_1"));
-        address.sendKeys("Shalimar Bagh");
-
-        WebElement postcode = driver.findElement(By.cssSelector("#billing_postcode"));
-        postcode.sendKeys("110088");
-
-        WebElement countyDropDown = driver.findElement(By.cssSelector("#billing_state_field .select2-arrow"));
-        countyDropDown.click();
-        Thread.sleep(2000);
-
-        List<WebElement> countyList = driver.findElements(By.cssSelector("#select2-drop ul li"));
-        for(WebElement county : countyList){
-            if(county.getText().equals("Delhi")) {
-                county.click();
-                Thread.sleep(3000);
-                break;
-            }
-        }
+        checkoutPage = new CheckoutPage(driver);
+        checkoutPage.fill_PersonalDetails();
     }
 
     @And("^select same delivery address$")
     public void selectSameDeliveryAddress() throws Throwable {
-        WebElement shipToDifferetAddress = driver.findElement(By.cssSelector("#ship-to-different-address-checkbox"));
-        shipToDifferetAddress.click();
-        Thread.sleep(3000);
+        checkoutPage = new CheckoutPage(driver);
+        checkoutPage.check_ShipToDifferentAddress(false);
     }
 
     @And("^select payment method as \"([^\"]*)\" payment$")
-    public void selectPaymentMethodAsCheckPayment(String name) throws Throwable {
-        List<WebElement> paymentMethod = driver.findElements(By.cssSelector("ul.wc_payment_methods li"));
-        paymentMethod.get(0).click();
+    public void selectPaymentMethodAsCheckPayment(String buttonName) throws Throwable {
+        checkoutPage = new CheckoutPage(driver);
+        checkoutPage.select_PaymentMethod(buttonName);
     }
 
     @And("^place the order$")
     public void placeTheOrder() throws Throwable {
-        WebElement acceptTC = driver.findElement(By.cssSelector("#terms.input-checkbox"));
-        acceptTC.click();
+        checkoutPage = new CheckoutPage(driver);
+        checkoutPage.check_TermsAndCondition(true);
+        checkoutPage.clickOn_PlaceOrder();
 
-        WebElement placeOrder = driver.findElement(By.cssSelector("#place_order"));
-        placeOrder.submit();
+        driver.quit();
     }
 }
 
