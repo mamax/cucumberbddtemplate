@@ -1,16 +1,17 @@
-package com.tools.qa.pageobjects;
+package com.tools.qa.dataproviders;
 
+import com.tools.qa.pageobjects.CartPage;
+import com.tools.qa.pageobjects.CheckoutPage;
+import com.tools.qa.pageobjects.HomePage;
+import com.tools.qa.pageobjects.ProductListingPage;
 import org.openqa.selenium.WebDriver;
 
 public class PageObjectManager {
+
     private WebDriver driver;
-
     private ProductListingPage productListingPage;
-
-    private CartPage cartPage;
-
     private HomePage homePage;
-
+    private CartPage cartPage;
     private CheckoutPage checkoutPage;
 
     public PageObjectManager(WebDriver driver) {
