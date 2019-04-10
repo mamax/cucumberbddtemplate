@@ -1,4 +1,4 @@
-package run;
+package com.tools.qa.run;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;

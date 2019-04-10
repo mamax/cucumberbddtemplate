@@ -40,13 +40,6 @@ public class ConfigFileReader {
         } else throw new RuntimeException("implicity wait property was not definned in configs");
     }
 
-    public String getDriverPath() {
-        String driverPath = properties.getProperty("driver.path");
-        if (driverPath != null) {
-            return driverPath;
-        } else throw new RuntimeException("driverpath wasn't defined in configs");
-    }
-
     public String getBasePath() {
         String basePath = properties.getProperty("base.url");
         if (basePath != null) {

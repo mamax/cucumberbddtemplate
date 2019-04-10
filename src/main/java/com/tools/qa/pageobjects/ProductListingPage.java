@@ -15,7 +15,7 @@ public class ProductListingPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(how = How.CSS, using = "button.single_add_to_cart_button")
+    @FindBy(how = How.CSS, using = ".single_add_to_cart_button.button.alt")
     private WebElement btn_AddToCart;
 
     @FindAll(@FindBy(how = How.CSS, using = ".noo-product-inner"))

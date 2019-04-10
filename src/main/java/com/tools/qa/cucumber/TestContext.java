@@ -1,20 +1,20 @@
 package com.tools.qa.cucumber;
 
 import com.tools.qa.dataproviders.PageObjectManager;
-import com.tools.qa.dataproviders.WebDriverManager;
+import com.tools.qa.dataproviders.MyWebDriverManager;
 
 public class TestContext {
 
-    private WebDriverManager webDriverManager;
+    private MyWebDriverManager myWebDriverManager;
     private PageObjectManager pageObjectManager;
 
     public TestContext(){
-        webDriverManager = new WebDriverManager();
-        pageObjectManager = new PageObjectManager(webDriverManager.getDriver());
+        myWebDriverManager = new MyWebDriverManager();
+        pageObjectManager = new PageObjectManager(myWebDriverManager.getDriver());
     }
 
-    public WebDriverManager getWebDriverManager() {
-        return webDriverManager;
+    public MyWebDriverManager getMyWebDriverManager() {
+        return myWebDriverManager;
     }
 
     public PageObjectManager getPageObjectManager() {
