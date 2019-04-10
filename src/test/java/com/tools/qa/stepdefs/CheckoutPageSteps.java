@@ -32,7 +32,5 @@ public class CheckoutPageSteps {
     public void placeTheOrder() throws Throwable {
         checkoutPage.check_TermsAndCondition(true);
         checkoutPage.clickOn_PlaceOrder();
-
-        testContext.getWebDriverManager().closeBrowser();
     }
 }
