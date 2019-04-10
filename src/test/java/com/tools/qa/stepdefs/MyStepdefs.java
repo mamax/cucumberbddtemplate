@@ -1,11 +1,11 @@
 package com.tools.qa.stepdefs;
 
-import com.tools.qa.dataproviders.ConfigFileReader;
-import com.tools.qa.pageObjects.CartPage;
-import com.tools.qa.pageObjects.CheckoutPage;
-import com.tools.qa.pageObjects.HomePage;
-import com.tools.qa.pageObjects.PageObjectManager;
-import com.tools.qa.pageObjects.ProductListingPage;
+import com.tools.qa.dataproviders.FileReaderManager;
+import com.tools.qa.pageobjects.CartPage;
+import com.tools.qa.pageobjects.CheckoutPage;
+import com.tools.qa.pageobjects.HomePage;
+import com.tools.qa.pageobjects.PageObjectManager;
+import com.tools.qa.pageobjects.ProductListingPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -24,12 +24,11 @@ public class MyStepdefs {
 
     @Given("^user is on Home Page$")
     public void userIsOnTheHomePage() throws Throwable{
-        ConfigFileReader configFileReader = new ConfigFileReader();
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + configFileReader.getDriverPath());
+        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + FileReaderManager.getConfigFileReader().getDriverPath());
 
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(configFileReader.getImplicityWait(), TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(FileReaderManager.getConfigFileReader().getImplicityWait(), TimeUnit.SECONDS);
 
         pageObjectManager = new PageObjectManager(driver);
         homePage = pageObjectManager.getHomePage();

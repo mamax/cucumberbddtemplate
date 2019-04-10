@@ -1,25 +1,23 @@
-package com.tools.qa.pageObjects;
+package com.tools.qa.pageobjects;
 
-import com.tools.qa.dataproviders.ConfigFileReader;
+import com.tools.qa.dataproviders.FileReaderManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
     WebDriver driver;
-    ConfigFileReader configFileReader;
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        configFileReader = new ConfigFileReader();
     }
 
     public void perform_Search(String search) {
-        driver.navigate().to(configFileReader.getBasePath() + "/?s=" + search + "&post_type=product");
+        driver.navigate().to(FileReaderManager.getConfigFileReader().getBasePath() + "/?s=" + search + "&post_type=product");
     }
 
     public void navigateTo_HomePage() {
-        driver.get(configFileReader.getBasePath());
+        driver.get(FileReaderManager.getConfigFileReader().getBasePath());
     }
 
 }
