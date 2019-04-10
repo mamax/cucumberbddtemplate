@@ -12,8 +12,8 @@ import java.util.concurrent.TimeUnit;
 public class WebDriverManager {
 
     private WebDriver driver;
-    private static DriverType driverType;
-    private static EnvironmentType environmentType;
+    private DriverType driverType;
+    private EnvironmentType environmentType;
 
     public WebDriverManager() {
         driverType = FileReaderManager.getConfigFileReader().getBrowserType();
@@ -40,7 +40,7 @@ public class WebDriverManager {
             case FIREFOX: driver = new FirefoxDriver();
             break;
             case CHROME:
-                System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + FileReaderManager.getConfigFileReader().getDriverPath());
+                System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + FileReaderManager.getInstance().getConfigFileReader().getDriverPath());
                 driver = new ChromeDriver();
                 break;
             case IE: driver = new InternetExplorerDriver();
@@ -48,7 +48,7 @@ public class WebDriverManager {
             default: driver = new FirefoxDriver();
         }
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(FileReaderManager.getConfigFileReader().getImplicityWait(), TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(FileReaderManager.getInstance().getConfigFileReader().getImplicityWait(), TimeUnit.SECONDS);
         return driver;
     }
 

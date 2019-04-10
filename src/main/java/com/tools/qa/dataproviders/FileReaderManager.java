@@ -7,12 +7,12 @@ public class FileReaderManager {
     private FileReaderManager() {
     }
 
-    public static FileReaderManager getInstance(){
+    public static FileReaderManager getInstance() {
         return fileReaderManager;
     }
 
     public static ConfigFileReader getConfigFileReader() {
-        if (configFileReader == null){
+        if (configFileReader == null) {
             configFileReader = new ConfigFileReader();
         }
         return configFileReader;

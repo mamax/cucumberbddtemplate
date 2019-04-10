@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class ProductListingPage {
+    private WebDriver driver;
     public ProductListingPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }

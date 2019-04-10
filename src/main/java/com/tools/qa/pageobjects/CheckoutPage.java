@@ -1,5 +1,6 @@
 package com.tools.qa.pageobjects;
 
+import com.tools.qa.util.WaitHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class CheckoutPage {
+    private WebDriver driver;
     public CheckoutPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
@@ -87,20 +89,17 @@ public class CheckoutPage {
 
     public void check_ShipToDifferentAddress(boolean value) {
         if(!value) chkbx_ShipToDifferetAddress.click();
-        try { Thread.sleep(3000);}
-        catch (InterruptedException e) {}
+        WaitHelper.untilJqueryIsDone(driver);
     }
 
     public void select_Country(String countryName) {
         drpdwn_CountryDropDownArrow.click();
-        try { Thread.sleep(2000);}
-        catch (InterruptedException e) {}
+        WaitHelper.untilJqueryIsDone(driver);
 
         for(WebElement country : country_List){
             if(country.getText().equals(countryName)) {
                 country.click();
-                try { Thread.sleep(3000);}
-                catch (InterruptedException e) {}
+                WaitHelper.untilJqueryIsDone(driver);
                 break;
             }
         }
@@ -108,14 +107,12 @@ public class CheckoutPage {
 
     public void select_County(String countyName) {
         drpdwn_CountyDropDownArrow.click();
-        try { Thread.sleep(2000);}
-        catch (InterruptedException e) {}
+        WaitHelper.untilJqueryIsDone(driver);
 
         for(WebElement county : country_List){
             if(county.getText().equals(countyName)) {
                 county.click();
-                try { Thread.sleep(3000);}
-                catch (InterruptedException e) {}
+                WaitHelper.untilJqueryIsDone(driver);
                 break;
             }
         }
@@ -129,8 +126,7 @@ public class CheckoutPage {
         }else {
             new Exception("Payment Method not recognised : " + paymentMethod);
         }
-        try { Thread.sleep(3000);}
-        catch (InterruptedException e) {}
+        WaitHelper.untilJqueryIsDone(driver);
 
     }
 

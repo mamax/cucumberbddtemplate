@@ -13,11 +13,11 @@ public class HomePage {
     }
 
     public void perform_Search(String search) {
-        driver.navigate().to(FileReaderManager.getConfigFileReader().getBasePath() + "/?s=" + search + "&post_type=product");
+        driver.navigate().to(FileReaderManager.getInstance().getConfigFileReader().getBasePath() + "/?s=" + search + "&post_type=product");
     }
 
     public void navigateTo_HomePage() {
-        driver.get(FileReaderManager.getConfigFileReader().getBasePath());
+        driver.get(FileReaderManager.getInstance().getConfigFileReader().getBasePath());
     }
 
 }
