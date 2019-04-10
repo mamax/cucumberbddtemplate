@@ -1,6 +1,6 @@
 package com.tools.qa.stepdefs;
 
-import com.tools.qa.dataproviders.FileReaderManager;
+import com.tools.qa.dataproviders.WebDriverManager;
 import com.tools.qa.pageobjects.CartPage;
 import com.tools.qa.pageobjects.CheckoutPage;
 import com.tools.qa.pageobjects.HomePage;
@@ -10,9 +10,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.util.concurrent.TimeUnit;
 
 public class MyStepdefs {
     WebDriver driver;
@@ -21,14 +18,12 @@ public class MyStepdefs {
     CartPage cartPage;
     CheckoutPage checkoutPage;
     PageObjectManager pageObjectManager;
+    WebDriverManager webDriverManager;
 
     @Given("^user is on Home Page$")
     public void userIsOnTheHomePage() throws Throwable{
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + FileReaderManager.getConfigFileReader().getDriverPath());
-
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(FileReaderManager.getConfigFileReader().getImplicityWait(), TimeUnit.SECONDS);
+        webDriverManager = new WebDriverManager();
+        driver = webDriverManager.getDriver();
 
         pageObjectManager = new PageObjectManager(driver);
         homePage = pageObjectManager.getHomePage();
@@ -75,7 +70,7 @@ public class MyStepdefs {
         checkoutPage.check_TermsAndCondition(true);
         checkoutPage.clickOn_PlaceOrder();
 
-        driver.quit();
+        webDriverManager.closeBrowser();
     }
 }
 

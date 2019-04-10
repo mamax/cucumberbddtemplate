@@ -1,5 +1,8 @@
 package com.tools.qa.dataproviders;
 
+import com.tools.qa.enums.DriverType;
+import com.tools.qa.enums.EnvironmentType;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,6 +12,8 @@ import java.util.Properties;
 public class ConfigFileReader {
     private Properties properties;
     private final String configPath = "configs//config.properties";
+    private DriverType driverType;
+    private EnvironmentType environmentType;
 
     public ConfigFileReader() {
         BufferedReader bufferedReader;
@@ -47,5 +52,40 @@ public class ConfigFileReader {
         if (basePath != null) {
             return basePath;
         } else throw new RuntimeException("base path was not defined");
+    }
+
+    public DriverType getBrowserType(){
+        String browser = properties.getProperty("default.browser");
+        if (browser != null){
+            switch (browser) {
+                case "chrome":
+                    driverType = DriverType.CHROME;
+                    break;
+                case "firefox":
+                    driverType = DriverType.FIREFOX;
+                    break;
+                case "ie":
+                    driverType = DriverType.IE;
+                    break;
+                default: driverType = DriverType.CHROME;
+            }
+            return driverType;
+        } else throw new RuntimeException("browser is not defined in properties");
+    }
+
+    public EnvironmentType getEnvironment(){
+        String env = properties.getProperty("environment.type");
+        if (env != null){
+            switch (env){
+                case "local":
+                    environmentType = EnvironmentType.LOCAL;
+                    break;
+                case "remote" :
+                    environmentType = EnvironmentType.REMOTE;
+                    break;
+                default : environmentType= EnvironmentType.LOCAL;
+            }
+            return environmentType;
+        } else throw new RuntimeException("env is not defined in properties");
     }
 }
