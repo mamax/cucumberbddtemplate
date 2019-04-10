@@ -1,5 +1,6 @@
 package com.tools.qa.stepdefs;
 
+import com.tools.qa.dataproviders.ConfigFileReader;
 import com.tools.qa.pageObjects.CartPage;
 import com.tools.qa.pageObjects.CheckoutPage;
 import com.tools.qa.pageObjects.HomePage;
@@ -23,10 +24,13 @@ public class MyStepdefs {
 
     @Given("^user is on Home Page$")
     public void userIsOnTheHomePage() throws Throwable{
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\libs\\chromedriver.exe");
+        ConfigFileReader configFileReader = new ConfigFileReader();
+        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + configFileReader.getDriverPath());
+
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(configFileReader.getImplicityWait(), TimeUnit.SECONDS);
+
         pageObjectManager = new PageObjectManager(driver);
         homePage = pageObjectManager.getHomePage();
         homePage.navigateTo_HomePage();
