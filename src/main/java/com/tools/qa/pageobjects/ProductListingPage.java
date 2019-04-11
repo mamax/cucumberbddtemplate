@@ -5,14 +5,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class ProductListingPage {
+public class ProductListingPage extends AbstractPage {
+
     private WebDriver driver;
     public ProductListingPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+        super(driver);
+//        PageFactory.initElements(driver, this);
     }
 
     @FindBy(how = How.CSS, using = "button.single_add_to_cart_button")

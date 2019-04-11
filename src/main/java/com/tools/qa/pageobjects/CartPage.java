@@ -7,10 +7,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
-public class CartPage {
-    private WebDriver driver;
+public class CartPage extends AbstractPage{
+
     public CartPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     @FindBy(how = How.CSS, using = ".cart-button")

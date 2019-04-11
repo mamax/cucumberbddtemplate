@@ -2,14 +2,11 @@ package com.tools.qa.pageobjects;
 
 import com.tools.qa.dataproviders.FileReaderManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 
-public class HomePage {
-    WebDriver driver;
+public class HomePage extends AbstractPage {
 
     public HomePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     public void perform_Search(String search) {

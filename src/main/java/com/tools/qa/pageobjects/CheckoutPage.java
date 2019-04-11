@@ -10,10 +10,10 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class CheckoutPage {
+public class CheckoutPage extends AbstractPage {
     private WebDriver driver;
     public CheckoutPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     @FindBy(how = How.CSS, using = "#billing_first_name")
