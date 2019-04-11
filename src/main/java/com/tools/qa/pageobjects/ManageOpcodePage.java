@@ -20,7 +20,7 @@ public class ManageOpcodePage extends AbstractPage{
     }
 
     public void goToTab(String tabName) {
-        driver.findElement(By.xpath(String.format("//div[text()='%s']", tabName))).click();
+        driver.findElement(By.xpath(String.format("//*[text()='%s']", tabName))).click();
         WaitHelper.untilPageLoadComplete(driver);
     }
 

@@ -4,8 +4,10 @@ import com.tools.qa.dataproviders.FileReaderManager;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -27,5 +29,10 @@ public class AbstractPage {
         } catch (TimeoutException rte) {
             throw new TimeoutException(rte.getMessage());
         }
+    }
+
+    public void waitForElement(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, waitTimeOutSeconds);
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 }

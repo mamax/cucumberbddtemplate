@@ -1,5 +1,6 @@
 package com.tools.qa.dataproviders;
 
+import com.tools.qa.pageobjects.ArchivePage;
 import com.tools.qa.pageobjects.CartPage;
 import com.tools.qa.pageobjects.CheckoutPage;
 import com.tools.qa.pageobjects.HomePage;
@@ -15,6 +16,7 @@ public class PageObjectManager {
     private CartPage cartPage;
     private CheckoutPage checkoutPage;
     private ManageOpcodePage manageOpcodePage;
+    private ArchivePage archivePage;
 
     public PageObjectManager(WebDriver driver) {
         this.driver = driver;
@@ -38,5 +40,9 @@ public class PageObjectManager {
 
     public ManageOpcodePage getManageOpcodePage(){
         return (manageOpcodePage == null) ? manageOpcodePage = new ManageOpcodePage(driver) : manageOpcodePage;
+    }
+
+    public ArchivePage getArchivePage(){
+        return (archivePage == null) ? archivePage = new ArchivePage(driver) : archivePage;
     }
 }
