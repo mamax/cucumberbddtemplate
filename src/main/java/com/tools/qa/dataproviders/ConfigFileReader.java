@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class ConfigFileReader {
     private Properties properties;
-    private final String configPath = "configs//config.properties";
+    private final String configPath = "src//main//resources//config.properties";
     private DriverType driverType;
     private EnvironmentType environmentType;
 
@@ -37,7 +37,7 @@ public class ConfigFileReader {
         String implWait = properties.getProperty("implicity.wait.timeout.seconds");
         if (implWait!= null){
             return Long.parseLong(implWait);
-        } else throw new RuntimeException("implicity wait property was not definned in configs");
+        } else throw new RuntimeException("Implicity wait property was not defined in configs");
     }
 
     public String getBasePath() {
