@@ -11,7 +11,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <cucumber.version>4.3.1</cucumber.version>
-        <webdrivermanager.version>3.0.0</webdrivermanager.version>
+        <webdrivermanager.version>5.3.0</webdrivermanager.version>
         <log4j12.version>1.7.25</log4j12.version>
         <google-guava.version>23.6-jre</google-guava.version>
         <cucumber.jvm.parallel.version>5.0.0</cucumber.jvm.parallel.version>

@@ -41,7 +41,7 @@ public class MyWebDriverManager {
             case FIREFOX: driver = new FirefoxDriver();
             break;
             case CHROME:
-                WebDriverManager.chromedriver().version("90.0.4430.24").setup();
+                WebDriverManager.chromedriver().setup();
                 System.out.println("chromeDriver has been setup");
                 driver = new ChromeDriver();
                 break;

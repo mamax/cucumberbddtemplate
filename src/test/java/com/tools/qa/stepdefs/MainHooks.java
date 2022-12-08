@@ -3,6 +3,8 @@ package com.tools.qa.stepdefs;
 import com.tools.qa.cucumber.TestContext;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 public class MainHooks {
 
@@ -22,6 +24,16 @@ public class MainHooks {
          Navigating to certain page
          or anything before the test
          */
+    }
+
+    @BeforeSuite
+    public void edwed() {
+        System.out.println("---before suite");
+    }
+
+    @AfterSuite
+    public void dwddw() {
+        System.out.println("---after suite---");
     }
 
     @After
